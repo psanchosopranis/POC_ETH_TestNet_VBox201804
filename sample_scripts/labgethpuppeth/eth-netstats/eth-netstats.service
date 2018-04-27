@@ -1,0 +1,21 @@
+[Unit]
+Description=Ethereum Network Stats (visual interface for tracking ethereum network status)
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=devel1
+Group=devel1
+UMask=0007
+WorkingDirectory=/home/devel1/ethtools/eth-netstats
+
+ExecStart=/home/devel1/ethtools/eth-netstats/eth-netstats_start.sh
+ExecStop=/usr/bin/kill -15 $MAINPID
+
+SuccessExitStatus=143
+RestartPreventExitStatus=143
+
+LimitNOFILE=102642
+
+[Install]
+WantedBy=multi-user.target

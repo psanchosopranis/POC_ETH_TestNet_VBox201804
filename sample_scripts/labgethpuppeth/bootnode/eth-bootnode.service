@@ -1,0 +1,21 @@
+[Unit]
+Description=Ethereum Network Bootnode (Bootnode de la Testnet)
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=devel1
+Group=devel1
+UMask=0007
+WorkingDirectory=/home/devel1/ethtestnet/bootnode
+
+ExecStart=/home/devel1/ethtestnet/bootnode/bootnode_start.sh
+ExecStop=/usr/bin/kill -15 $MAINPID
+
+SuccessExitStatus=143
+RestartPreventExitStatus=143
+
+LimitNOFILE=102642
+
+[Install]
+WantedBy=multi-user.target
